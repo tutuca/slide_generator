@@ -7,15 +7,16 @@ import sys
 import os
 import errno
 import shutil
-
+from glob import glob
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
+CWD = os.getcwd()
+PACK = os.path.join(CWD, 'pack')
 
 def process_slides(slides_file):
-
-    with codecs.open(slides_file.replace(".md", ".html"), 'w', encoding='utf8') as outfile:
-        md = codecs.open(slides_file, encoding='utf8').read()
+    file_name = os.path.join(PACK, slides_file.replace(".md", ".html"))
+    with codecs.open(file_name, 'w', encoding='utf8') as outfile:
+        md = codecs.open(os.path.join(CWD, slides_file), encoding='utf8').read()
         md_slides = md.split('\n---\n')
         print 'Compiled %s slides.' % len(md_slides)
 
@@ -42,11 +43,12 @@ def process_slides(slides_file):
 
 
 def pack_slides():
-    cwd = os.getcwd()
     try:
-        shutil.copytree(os.path.join(BASE_DIR, "js"), os.path.join(cwd,"js"))
-        shutil.copytree(os.path.join(BASE_DIR, "theme", "css"), os.path.join(cwd, "theme", "css"))
-        shutil.copytree(os.path.join(BASE_DIR, "theme", "img"), os.path.join(cwd, "theme", "img"))
+        shutil.copytree(os.path.join(BASE_DIR, "js"), os.path.join(PACK,"js"))
+        shutil.copytree(os.path.join(BASE_DIR, "theme", "css"), os.path.join(PACK, "theme", "css"))
+        shutil.copytree(os.path.join(BASE_DIR, "theme", "img"), os.path.join(PACK, "theme", "img"))
+        shutil.copytree(os.path.join(CWD, "img"), os.path.join(PACK,"img"))
+        shutil.copy(os.path.join(CWD, "slide_config.js"), PACK)
     except OSError as exc:
         if exc.errno == errno.EEXIST:
             pass
@@ -73,6 +75,11 @@ def postprocess_html(html, metadata):
         html = html.replace('<ol>', '<ol class="build">')
     return html
 
-if __name__ == '__main__':
-    sf = sys.argv[1] if len(sys.argv) == 2 else "slides.md"
+def main():
+    sf = sys.argv[1] if len(sys.argv) == 2 else glob("*.md").pop()
+    pack_slides()
     process_slides(sf)
+
+
+if __name__ == '__main__':
+    main()
