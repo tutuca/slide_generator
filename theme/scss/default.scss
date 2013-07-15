@@ -139,9 +139,9 @@ slides > slide {
       bottom: $slide-top-bottom-padding / 2;
       left: $slide-left-right-padding;
       background: url(../img/signature.png) no-repeat 0 50%;
-      @include background-size($brand-small-icon-size $brand-small-icon-size);
-      padding-left: $brand-small-icon-size + 10;
-      height: $brand-small-icon-size;
+      @include background-size(120px 50px);
+      padding-left: 120px + 10;
+      height: 50px;
       line-height: 1.9;
     }
     &:after {
@@ -847,7 +847,7 @@ article.smaller {
 
 aside.gdbar {
   height: 97px;
-  width: 215px;
+  width: 255px;
   position: absolute;
   left: -1px;
   top: 125px;
@@ -875,11 +875,10 @@ aside.gdbar {
   }
 
   img {
-    width: 85px;
-    height: 85px;
+    width: 185px;
     position: absolute;
     right: 0;
-    margin: 8px 15px;
+    margin: 11px 15px;
   }
 }
 
