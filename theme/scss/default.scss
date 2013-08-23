@@ -527,6 +527,15 @@ slide.fill {
   background-repeat: no-repeat;
   @include border-radius($slide-border-radius);
   @include background-size(cover);
+  article {
+    margin: 0;
+    padding: 0
+  }
+  img {
+    width:100%;
+  }
+  margin:0 auto;
+  padding: 0;
 }
 
 /* Size variants */
