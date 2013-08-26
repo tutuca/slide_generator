@@ -281,7 +281,7 @@ h2 {
   font-size: 45px;
   line-height: 45px;
   letter-spacing: -2px;
-  color: $gray-4;
+  color: $brand-red;
 }
 
 h3 {
@@ -289,7 +289,7 @@ h3 {
   letter-spacing: -1px;
   line-height: 2;
   font-weight: inherit;
-  color: $gray-3;
+  color: $brand-red-secondary;
 }
 
 ul {
@@ -521,21 +521,6 @@ q {
     position: absolute;
     margin-left: 0.1em;
   }
-}
-
-slide.fill {
-  background-repeat: no-repeat;
-  @include border-radius($slide-border-radius);
-  @include background-size(cover);
-  article {
-    margin: 0;
-    padding: 0
-  }
-  img {
-    width:100%;
-  }
-  margin:0 auto;
-  padding: 0;
 }
 
 /* Size variants */
@@ -817,7 +802,8 @@ article.smaller {
 
 .segue {
   padding: $slide-left-right-padding $slide-left-right-padding * 2;
-
+}
+.fill, .segue {
   h2 {
     color: $gray-1;
     font-size: 60px;
@@ -831,7 +817,23 @@ article.smaller {
     bottom: 225px;
   }
 }
+.fill {
+  background-repeat: no-repeat;
+  @include border-radius($slide-border-radius);
+  @include background-size(cover);
+  padding:0;
+  article {
+    margin-top:0;
 
+  }
+  img {
+    display:block;
+    width:100%;
+    margin:0 auto;
+    padding: 0;
+  }
+  
+}
 .thank-you-slide {
   background: $brand-blue !important;
   color: white;
